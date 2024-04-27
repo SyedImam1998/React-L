@@ -1,4 +1,3 @@
-import React from "react";
 import useLocalStorage from "../custom-hooks/useLocalStorage";
 import { useLocation, useNavigate } from "react-router-dom";
 const Login = () => {

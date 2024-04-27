@@ -1,18 +1,23 @@
 import { useState } from "react";
 import useGetData from "../custom-hooks/useGetData";
+import ShowData from "./ShowData";
 
 export const DisplayData = () => {
   const [selectedValue, setSelectedValue] = useState("data-1");
-  const data = useGetData(selectedValue);
+  const { data, isLoading, isError } = useGetData(selectedValue);
 
   const handleSelectChange = (e) => {
     console.log(e);
     setSelectedValue(e);
   };
+
   return (
     <div>
       <div>
-        <select onChange={(e) => handleSelectChange(e.target.value)}>
+        <select
+          value={selectedValue}
+          onChange={(e) => handleSelectChange(e.target.value)}
+        >
           {/* check with onSelected */}
           <option value="data-1">Data-1</option>
           <option value="data-2">Data-2</option>
@@ -21,11 +26,13 @@ export const DisplayData = () => {
         </select>
         {/* <input type="text" onSelect={handleSelect} /> */}
       </div>
+
       <div>
-        {data.length > 0 &&
-          data.map((item) => {
-            return <li key={item}>{item}</li>;
-          })}
+        <ShowData
+          data={data}
+          isLoading={isLoading}
+          isError={isError}
+        ></ShowData>
       </div>
     </div>
   );
